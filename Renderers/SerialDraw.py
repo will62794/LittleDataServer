@@ -28,8 +28,11 @@ class SerialDraw():
 		time.sleep(.005)
 		self.serPorts[self.barNum].write(cmd)
 
-	def transition(self,transition):
-		cmd="transition "+transition+"\n"
+	def transition(self,transition,fadetime=0):
+		if transition=="fade":
+			cmd="transition "+transition+" "+str(fadetime)+"\n"
+		else:
+			cmd="transition "+transition+"\n"
 		time.sleep(.005)
 		self.serPorts[self.barNum].write(cmd)
 
@@ -55,11 +58,11 @@ class SerialDraw():
 		time.sleep(.005)
 		self.serPorts[self.barNum].write(cmd)
 
-	def drawVerticalString(self,text,color,font):
+	def drawVerticalString(self,x,text,color,font):
 		i=0;
 		offset=10
 		for letter in text:
-			self.drawCenteredValue(letter,i*offset,color,font)
+			self.drawChar(x,i*offset,color,font,letter)
 			i+=1
 
 
