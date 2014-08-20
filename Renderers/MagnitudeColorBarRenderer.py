@@ -19,7 +19,7 @@ class MagnitudeColorBarRenderer(Renderer):
 		self.drawer.clearDrawBuffer()
 		self.drawer.drawBarWithValue(colorForValue,str(percentage))
 		self.drawer.drawVerticalString(2,value,[0,0,0],"6x10")
-		self.drawer.transition("fade")
+		self.drawer.transition("slide")
 		#self.drawer.bufferswap("false")
 		#except:
 		#	pass
