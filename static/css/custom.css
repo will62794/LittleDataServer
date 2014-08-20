@@ -1,0 +1,40 @@
+.arrow{	
+
+position:absolute;
+
+top:50%;
+margin-top:-35px;
+margin-left: -20px;
+
+
+	width: 0; 
+	height: 0; 
+	border-top: 50px solid transparent;
+	border-bottom: 50px solid transparent;
+	
+	border-left: 50px solid black;
+	opacity:.85;
+
+}
+
+.datasource{
+
+color:#333;
+/*background-color:#DDD;
+box-shadow: 1px 1px 7px gray;*/
+}
+
+.renderer{
+/*box-shadow: 1px 1px 7px gray;*/
+/*background-color:#e1eaa4;*/
+
+}
+
+.datasourceTitle{
+
+}
+
+.rendererTitle{
+
+	color:#5b7f2b;
+}

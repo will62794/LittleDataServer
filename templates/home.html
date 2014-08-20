@@ -1,0 +1,190 @@
+<html>
+<head>
+	<title></title>
+
+	<link rel="stylesheet" type="text/css" href={{url_for('static', filename='css/bootstrap.min.css')}}>
+	<link rel="stylesheet" type="text/css" href={{url_for('static', filename='css/custom.css')}}>
+	<link rel="stylesheet" type="text/css" href={{url_for('static', filename='css/switch.css')}}>
+
+
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+	<link rel="stylesheet" type="text/css" href={{url_for('static', filename='js/bootstrap.min.js')}}>
+	<link href='http://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' type='text/css'>
+
+
+
+</head>
+<body>
+
+
+	<br><br>
+
+	<div class="row" style="border-bottom:solid;border-bottom-width:1px;border-bottom-color:#444;padding-bottom:15px;">
+		<h1 style="font-family: 'Electrolize', sans-serif;padding-left:20px;font-size:60px;margin-left:20px;">little<span style="color:#d11212;">Data</span></h1>
+
+	</div>
+
+
+
+	<div class="row" >
+		<br>
+		<div class="span1"></div>
+
+		<!--------------------------- -->
+		<!-- DATA SOURCE CONFIG PANE -->
+		<!--------------------------- -->
+
+
+		<div class="span6 datasource" style="padding:26px 26px 2px 26px;border-radius:15px;">
+			<h2 class="datasourceTitle">Data Source <img width=40px src="{{url_for('static', filename='img/databaseicon.png')}}"></h2>
+
+			<p style="border-bottom:solid;border-bottom-width:1px;padding-bottom:10px;">To start, select a Data Source below and set the configuration settings.
+			</p>
+
+
+			<ul class="nav nav-pills">
+				{%for dataSource in dataSources.values()%}
+				<li  class={%if dataSource.title==current_datasource.title%}'active'{%endif%}><a href="/datasource/{{dataSource.title}}">{{dataSource.title}}</a></li>
+				{%endfor%}
+
+			</ul>
+			<h4>Options</h4>
+
+			<form method=post action="/updateDataSource">
+
+
+				{%for option in current_datasource.options.keys()%}
+
+				<!--LIST CONFIG OPTION-->
+				{% if convert_option(current_datasource.options[option])=="list" %}
+				<h5>{{option}}</h5>
+				{%for val in current_datasource.options[option]%}
+
+				<input type="text" name={{option}} value='{{val}}'>
+				<br>
+
+				{%endfor%}
+
+				<input type="text" name={{option}} placeholder='Add New...'>
+				<br>
+				<input type="text" name={{option}} placeholder='Add New...'>
+				<br>
+				
+				{%endif%}
+
+
+				<!--BOOLEAN CONFIG OPTION-->
+				{% if convert_option(current_datasource.options[option])=="bool" %}
+				<h5>{{option}}</h5>
+				<div class="onoffswitch">
+					<input type="checkbox" name="{{option}}" class="onoffswitch-checkbox" id="myonoffswitch" {%if current_datasource.options[option]%}checked{%endif%}>
+					<label class="onoffswitch-label" for="myonoffswitch">
+						<span class="onoffswitch-inner"></span>
+						<span class="onoffswitch-switch"></span>
+					</label>
+				</div>
+				{%endif%}
+				{%endfor%}
+				<br><br>
+
+				<input style="width:250px;height:40px;" type=submit value="Update Data Source" class="btn">
+			</form>
+		</div>
+
+		<div class="span1">
+
+
+
+			<div class="arrow"></div>
+
+		</div>
+
+
+
+		<!-- RENDERER CONFIG PANE -->
+
+		<div class="span6 renderer" style="padding:26px 26px 202px 26px;border-radius:15px;">
+
+			<h2 class="rendererTitle">Renderer	<img width=40px src="{{url_for('static', filename='img/paintbrushicon.jpg')}}"></h2>
+			<p>Select a Renderer for your Data Source and set the configuration settings.
+			</p>
+
+			<ul class="nav nav-pills">
+				{%for renderer in renderers.values()%}
+				<li class={%if renderer.title==current_renderer.title%}'active'{%endif%}><a href="/mode">{{renderer.title}}</a></li>
+				<br>
+				{%endfor%}
+			</ul>
+
+			<h4>Description</h4>
+			{{current_renderer.description}}
+
+			<h4>Options</h4>
+			<form method="post" action="/updateRenderer">
+
+				<input style="width:200px;height:40px;" type=submit value="Update Configuration" class="btn btn-submit">
+
+
+				<h5>Value scale</h5>
+				These lower and upper values represent the absolute maximum and minimum values that you think your data input value will achieve. For example, a temperature scale might have a Minimum of "-20" and a Maximum of "110" in degrees fahrenheit.
+
+				<br><br>
+				<label for="scaleMin">Scale Minimum</label>
+				<input type="text" name="scaleMin" value="{{current_renderer.scaleMin}}">
+				<label for="scaleMax">Scale Maximum</label>
+				<input type="text" name="scaleMax" value="{{current_renderer.scaleMax}}">
+
+
+				<br>
+				<h5>Color scale</h5>
+				This color scale represents a multi-point gradient corresponding to the range of data input values. <br><br>
+
+				<div id="gradientBar" style="text-align:center;color:white;font-size:12px;width:40px;height:{{105*current_renderer.colorscale|length}};background: linear-gradient(rgb(10,10,10), blue);float:left;position:relative;">
+
+					{%for i in range(current_renderer.colorscale|length) %}
+					<div style="margin-left:3px;bottom:{{i*(100/(current_renderer.colorscale|length-1))/1.07}}%;position:absolute;">
+
+						{{(current_renderer.scaleMin+i*((current_renderer.scaleMax-current_renderer.scaleMin)|float)/(current_renderer.colorscale|length-1))|round}}
+
+					</div>
+					{%endfor%}
+					<br>
+
+				</div>
+
+				<div style="float:left;width:220px;margin-left:20px;">
+					{%for gradientpoint in current_renderer.colorscale%}
+
+					<span>Red:</span> <input min="0" max="255" step="1" style="width:140px;" class="redSlider" type="range" name="color{{loop.index-1}}" value="{{gradientpoint[0]}}"/> <span>{{gradientpoint[0]}}</span>
+					<br>
+					Green: <input  min="0" max="255" step="1" style="width:140px;" class="greenSlider" type="range" name="color{{loop.index-1}}" value="{{gradientpoint[1]}}"/> <span>{{gradientpoint[1]}}</span>
+					<br>
+					Blue: <input  min="0" max="255" step="1" style="width:140px;" class="blueSlider" type="range" name="color{{loop.index-1}}" value="{{gradientpoint[2]}}"/> <span>{{gradientpoint[2]}}</span>
+
+					<div class="colorPatch" style="width:70px;height:15px;background-color:rgb({{gradientpoint[0]}},{{gradientpoint[1]}},{{gradientpoint[2]}});border-radius:4px;box-shadow:1px 1px 3px gray;margin-top:3px;"></div>
+					<br><br>
+
+					{%endfor%}
+				</div>
+
+				
+			</form>
+			<a href="/addColorscalePoint"><button  class="btn">Add Colorscale Point</button></a>
+			<br><br>
+			<a href="/deleteColorscalePoint"><button  class="btn">Delete Colorscale Point</button></a>
+
+
+		</div>
+
+
+	</div>
+</div>
+
+
+<script type="text/javascript" src={{url_for('static', filename='js/interactions.js')}}></script>
+
+
+</body>
+</html>
