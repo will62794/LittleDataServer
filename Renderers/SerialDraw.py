@@ -30,7 +30,7 @@ class SerialDraw():
 
 	def transition(self,transition,fadetime=0):
 		if transition=="fade":
-			cmd="transition "+transition+" "+str(fadetime)+"\n"
+			cmd="transition fade "+str(fadetime)+"\n"
 		else:
 			cmd="transition "+transition+"\n"
 		time.sleep(.005)
