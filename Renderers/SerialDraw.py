@@ -82,12 +82,7 @@ class SerialDraw():
 	def drawBarWithValue(self,color,value):
 		barHeight=int(64*float(value)/100)
 		self.drawRectangle(0,0,16,barHeight,color)
-		self.drawCenteredValue(value,50,[0,0,0])
-
-	def drawBarWithKeyValue(self,key,value,color):
-		barHeight=int(64*float(value)/100)
-		self.drawRectangle(0,0,16,barHeight,color)
-		self.drawCenteredValue(value,50,[0,0,0])
+		self.drawCenteredValue(value,50,[0,0,0],"8x13")
 	
 	def drawBarWithKeyValue(self,key,value,color):
 		barHeight=int(64*float(value)/100)
