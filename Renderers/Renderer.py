@@ -10,6 +10,7 @@ class Renderer(object):
 		self.drawer=SerialDraw()
 		self.drawer.WakeUpTeensy()
 
+	
 	def getScalePercentageForValue(self,value):
 		offsetValue=abs(self.scaleMin-int(value))
 		scaleSize=abs(self.scaleMax-self.scaleMin)

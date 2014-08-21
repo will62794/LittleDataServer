@@ -1,17 +1,52 @@
 import csv
 from DataSource import *
 import datetime
+import time
 
 class Subway(DataSource):
 	def __init__(self):
 		super(Subway, self).__init__()
-		self.options={"Route":"B","Direction":"Northbound","Stop":""}
+		self.options={"Route":"Q","Direction":"Northbound","Stop":"","Station":""}
 		self.title="Subway"
 		self.datafolder="mtadata/"
 		self.directionCode={"Northbound":"0","Southbound":"1"}
 		self.weekdays=[0,1,2,3,4]
 		self.saturday=5
 		self.sunday=6
+
+	def getAllStations(self):
+		stations = csv.DictReader(open(self.datafolder+"stops.txt"))
+		return stations
+	def getAllTimes(self):
+		stop_times= csv.DictReader(open(self.datafolder+"stop_times.txt"))
+		return stop_times
+
+	def getStationById(self,stop_id):
+		stations=self.getAllStations();
+		for station in stations:
+			if stop_id in station["stop_id"]:
+				return station
+
+
+	def getStopsForTrip(self):
+		trip_ids=[trip["trip_id"] for trip in self.getTrips()]
+		stop_ids=[]
+		for stop_time in self.getAllTimes():
+			if stop_time["trip_id"] in trip_ids :
+				if stop_time["stop_id"] not in stop_ids:
+					stop_ids.append(stop_time["stop_id"])
+		return stop_ids
+			
+
+	"""def TimesForStation(self):
+		times=[]
+		station=self.getStationById(self.options["Station"])
+		for time in self.getTimes():
+			print time["stop_id"]
+			if time["stop_id"]==station:
+				times.append(time["arrival_time"])
+
+		return times"""
 
 
 
@@ -28,7 +63,7 @@ class Subway(DataSource):
 		return route_trips
 
 
-	def getTimes(self):
+	def getTimesForStop(self):
 
 		alltimes= csv.DictReader(open(self.datafolder+"stop_times.txt"))
 		triptimes=[]
@@ -36,11 +71,33 @@ class Subway(DataSource):
 		trip_ids=[trip["trip_id"] for trip in trips]
 
 		for time in alltimes:
-			if time["trip_id"] in trip_ids and "D17" in time["stop_id"]:
+			#Get times for a route and a specific station
+			if time["trip_id"] in trip_ids and self.options["Station"] in time["stop_id"]:
 				triptimes.append(time)
-
 		return triptimes
 	
+	def getNextTrainTime(self):
+		times=sorted([t["arrival_time"] for t in self.getTimesForStop()])
+		print times
+		time_now=self.convertClockToSeconds(self.getLocalTime())
+		for t in times:
+			if time_now<self.convertClockToSeconds(t):
+				return t
+
+	def TimeUntilNextTrain(self):
+		secs=int(self.convertClockToSeconds(self.getNextTrainTime())-self.convertClockToSeconds(self.getLocalTime()))
+		return str(datetime.timedelta(seconds=secs))
+
+
+
+	def convertClockToSeconds(self,clockstring):
+		ftr = [3600,60,1]
+		return sum([a*b for a,b in zip(ftr, map(int,clockstring.split(':')))])
+
+	def getLocalTime(self):
+		return time.strftime("%H:%M:%S")
+	
+
 	def getKeyValue(self):
 		pass
 
@@ -55,12 +112,16 @@ class Subway(DataSource):
 			return "SUN"
 
 g=Subway()
+g.options["Station"]="D40"
+print g.TimeUntilNextTrain()
+#print "Next "+g.options["Route"]+" Train: "+g.getNextTrainTime()
+for stop in g.getStopsForTrip():
+	print g.getStationById(stop)["stop_name"]
 
-for t in g.getTrips():
-	pass
-	#print t	
-for time in g.getTimes():
-	#print time
-	print time["arrival_time"]
+#for t in g.getTimesForStop():
+	#print t["departure_time"]+" " +str(g.getStationById(t["stop_id"])["stop_name"])
+	#print ""
+	#pass
+	#print t["stop_id"]
 
 
