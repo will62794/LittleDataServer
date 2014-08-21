@@ -29,6 +29,7 @@ class DataUpdater(threading.Thread):
 				self.current_renderer.draw(keyValuePair)
 				print self.current_datasource.title
 				print keyValuePair
+				print "UPDATE"
 				self.lastChange=time.time()
 
 			time.sleep(2.0)
