@@ -18,8 +18,8 @@ class SubwayRenderer(Renderer):
 		value=keyValuePair[1]
 		color=keyValuePair[2]
 
-		percentage=self.getScalePercentageForValue(value)
-		colorForValue=self.getColorForValue(value)
+		#percentage=self.getScalePercentageForValue(value)
+		#colorForValue=self.getColorForValue(value)
 		
 		
 		self.drawer.barNum=0

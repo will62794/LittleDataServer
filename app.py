@@ -26,10 +26,12 @@ def index():
 @app.route('/datasource/<datasource>')
 def set_data_source(datasource):
 # show the user profile for that user
-	print "DataSource: "+datasource
 	app.dataUpdater.current_datasource=app.dataUpdater.datasources[datasource]
 	renderer=app.dataUpdater.current_datasource.renderers[0]
 	app.dataUpdater.current_renderer=app.dataUpdater.renderers[renderer]
+	print "DataSource: "+app.dataUpdater.current_datasource.title
+	print "Renderer: "+app.dataUpdater.current_renderer.title
+
 	return redirect("/")
 	
 @app.route('/startup')

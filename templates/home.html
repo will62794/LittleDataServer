@@ -108,39 +108,43 @@
 			<div class="span6 optionsPane">
 
 				<h2 class="rendererTitle">Options	<img width=40px src="http://www.altavian.com/Assets/Images/icon-settings.png"></h2>
-<br>
-
-
-				{%for option in current_datasource.options.keys()%}
-
-				{% if convert_option(current_datasource.options[option])=="list" %}
-				<h4>{{option}}</h4>
-				{%for val in current_datasource.options[option]%}
-
-				<input type="text" name={{option}} value='{{val}}'>
 				<br>
 
-				{%endfor%}
+				<form method=post action="/updateDataSource">
 
-				<input type="text" name={{option}} placeholder='Add New...'>
-				<br>
-				<input type="text" name={{option}} placeholder='Add New...'>
-				<br>
-				
-				{%endif%}
+					{%for option in current_datasource.options.keys()%}
+
+					{% if convert_option(current_datasource.options[option])=="list" %}
+					<h4>{{option}}</h4>
+					{%for val in current_datasource.options[option]%}
+
+					<input type="text" name={{option}} value='{{val}}'>
+					<br>
+
+					{%endfor%}
+
+					<input type="text" name={{option}} placeholder='Add New...'>
+					<br>
+					<input type="text" name={{option}} placeholder='Add New...'>
+					<br>
+					
+					{%endif%}
 
 
-				{% if convert_option(current_datasource.options[option])=="bool" %}
-				<h4>{{option}}</h4>
-				<div class="onoffswitch">
-					<input type="checkbox" name="{{option}}" class="onoffswitch-checkbox" id="myonoffswitch" {%if current_datasource.options[option]%}checked{%endif%}>
-					<label class="onoffswitch-label" for="myonoffswitch">
-						<span class="onoffswitch-inner"></span>
-						<span class="onoffswitch-switch"></span>
-					</label>
-				</div>
-				{%endif%}
-				{%endfor%}
+					{% if convert_option(current_datasource.options[option])=="bool" %}
+					<h4>{{option}}</h4>
+					<div class="onoffswitch">
+						<input type="checkbox" name="{{option}}" class="onoffswitch-checkbox" id="myonoffswitch" {%if current_datasource.options[option]%}checked{%endif%}>
+						<label class="onoffswitch-label" for="myonoffswitch">
+							<span class="onoffswitch-inner"></span>
+							<span class="onoffswitch-switch"></span>
+						</label>
+					</div>
+					{%endif%}
+					{%endfor%}
+					<br><br>
+					<input style="width:210px;height:40px;" type=submit value="Set" class="btn">
+				</form>
 
 
 

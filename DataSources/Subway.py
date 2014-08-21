@@ -90,7 +90,6 @@ class Subway(DataSource):
 	
 	def getNextTrainTime(self):
 		times=sorted([t["arrival_time"] for t in self.getTimesForStop()])
-		print times
 		time_now=self.convertClockToSeconds(self.getLocalTime())
 		for t in times:
 			if time_now<self.convertClockToSeconds(t):
