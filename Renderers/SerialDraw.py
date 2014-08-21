@@ -88,7 +88,8 @@ class SerialDraw():
 		barHeight=int(64*float(value)/100)
 		self.drawRectangle(0,64-barHeight,16,64,color)
 		self.drawCenteredValue(str(value)[:2],50,[0,0,0],"8x13")
-		if len(key)>0:
+		if len(key)>ls
+		0:
 			ypos=1
 			spacing=11
 			self.drawVerticalString(key[:3].upper(),[40,40,40],"8x13")
