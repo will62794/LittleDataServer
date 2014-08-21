@@ -22,9 +22,11 @@ class SubwayRenderer(Renderer):
 		colorForValue=self.getColorForValue(value)
 		
 		
-		self.drawer.barNum=random.choice(range(0,3))
+		self.drawer.barNum=0
+		self.drawer.clearDrawBuffer()
 		self.drawer.drawCircle(5,5,5,[255,0,0])
 		self.drawer.drawChar(5,5,[0,0,0],"8x13","A")
+		self.bufferswap("false")
 		#self.drawer.clearDrawBuffer()
 		#self.drawer.drawBarWithValue(colorForValue,str(percentage))
 		#self.drawer.drawVerticalString(2,value,[0,0,0],"6x10")
