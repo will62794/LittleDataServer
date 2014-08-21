@@ -64,7 +64,7 @@ class SerialDraw():
 
 	def drawVerticalString(self,x,text,color,font):
 		i=0;
-		offset=10
+		offset=8
 		for letter in text:
 			self.drawChar(x,i*offset,color,font,letter)
 			i+=1
