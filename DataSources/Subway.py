@@ -114,6 +114,7 @@ class Subway(DataSource):
 	
 
 	def getKeyValue(self):
+		return ["Q",100,[255,255,0]]
 		route=self.options["Route"]
 		return [route,self.TimeUntilNextTrain(),self.getColorForRoute(route)]
 
