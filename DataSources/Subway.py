@@ -8,11 +8,23 @@ class Subway(DataSource):
 		super(Subway, self).__init__()
 		self.options={"Route":"Q","Direction":"Northbound","Stop":"","Station":""}
 		self.title="Subway"
-		self.datafolder="mtadata/"
+		self.datafolder="DataSources/mtadata/"
 		self.directionCode={"Northbound":"0","Southbound":"1"}
 		self.weekdays=[0,1,2,3,4]
 		self.saturday=5
 		self.sunday=6
+		self.icon="http://ihspawprint.com/wp-content/uploads/2014/03/mta_nyc_logo_svg1.png"
+		self.renderers=["Subway"]
+
+	def getColorForRoute(self,route):
+		routes = csv.DictReader(open(self.datafolder+"stops.txt"))
+		for route in routes:
+			if route["route_id"]==route:
+				return self.getRGBFromHex(route["color_route"])
+
+	def getRGBFromHex(self,hexstringstring):
+		rgbstr=hexstring
+		return list(tuple(ord(c) for c in rgbstr.decode('hex')))
 
 	def getAllStations(self):
 		stations = csv.DictReader(open(self.datafolder+"stops.txt"))
@@ -89,7 +101,6 @@ class Subway(DataSource):
 		return str(datetime.timedelta(seconds=secs))
 
 
-
 	def convertClockToSeconds(self,clockstring):
 		ftr = [3600,60,1]
 		return sum([a*b for a,b in zip(ftr, map(int,clockstring.split(':')))])
@@ -99,7 +110,8 @@ class Subway(DataSource):
 	
 
 	def getKeyValue(self):
-		pass
+		route=self.options["Route"]
+		return [route,self.TimeUntilNextTrain(),self.getColorForRoute(route)]
 
 	def getDayCode(self):
 		datetime.datetime.today()
@@ -110,7 +122,7 @@ class Subway(DataSource):
 			return "SAT"
 		if day==self.sunday:
 			return "SUN"
-
+"""
 g=Subway()
 g.options["Station"]="D40"
 print g.TimeUntilNextTrain()
@@ -123,5 +135,5 @@ for stop in g.getStopsForTrip():
 	#print ""
 	#pass
 	#print t["stop_id"]
-
+"""
 

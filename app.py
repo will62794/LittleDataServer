@@ -28,11 +28,17 @@ def set_data_source(datasource):
 # show the user profile for that user
 	print "DataSource: "+datasource
 	app.dataUpdater.current_datasource=app.dataUpdater.datasources[datasource]
+	renderer=app.dataUpdater.current_datasource.renderers[0]
+	app.dataUpdater.current_renderer=app.dataUpdater.renderers[renderer]
 	return redirect("/")
 	
 @app.route('/startup')
 def startup():
 	return redirect("/")
+
+@app.route('/test')
+def test():
+	return render_template("test.html")
 
 @app.route('/updateDataSource',methods=['GET', 'POST'])
 def updateDataSource():

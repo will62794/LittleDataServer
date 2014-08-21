@@ -10,19 +10,18 @@ class MagnitudeColorBarRenderer(Renderer):
 		self.colorscale=[[139,68,254],[255,10,50],[155,20,50]]
 		self.options={}
 
-	def draw(self,key,value):
+	def draw(self,keyValuePair):
+		key=keyValuePair[0]
+		value=keyValuePair[1]
 		percentage=self.getScalePercentageForValue(value)
 		colorForValue=self.getColorForValue(value)
-		print colorForValue
 		
 		self.drawer.barNum=random.choice(range(0,3))
 		self.drawer.clearDrawBuffer()
 		self.drawer.drawBarWithValue(colorForValue,str(percentage))
 		self.drawer.drawVerticalString(2,value,[0,0,0],"6x10")
 		self.drawer.transition("slide")
-		#self.drawer.bufferswap("false")
-		#except:
-		#	pass
+
 
 
 

@@ -41,7 +41,11 @@ class SerialDraw():
 		time.sleep(.005)
 		#print cmd
 		self.serPorts[self.barNum].write(cmd)
-
+	
+	def drawCircle(self,x,y,r,color):
+		cmd="circle %s %s %s %s %s %s %s \n" % (str(x),str(y),int(r),color[0],color[1],color[2],color[0],color[1],color[2])
+		time.sleep(.005)
+		self.serPorts[self.barNum].write(cmd)
 
 	def drawRectangle(self,x,y,w,h,color):
 		cmd="rect %s %s %s %s %s %s %s \n" % (str(x),str(y),int(w),str(h),color[0],color[1],color[2])

@@ -9,8 +9,10 @@ class Weather(DataSource):
 	def __init__(self):
 		super(Weather, self).__init__()
 		#Set one default key
-		self.options={"Cities":["New York","Los Angeles"],"ZipCodes":["19075"],"RandomCities":False}
+		self.options={"Cities":["New York","Los Angeles"],"Randomize":False}
 		self.title="Weather"
+		self.icon="https://cdn3.iconfinder.com/data/icons/weather-and-forecast/51/Weather_icons_grey-03-512.png"
+		self.renderers=["MagnitudeColorBar"]
 
 	def CityWeatherData(self,city):
 		url="http://api.openweathermap.org/data/2.5/weather?q="+city
@@ -37,7 +39,7 @@ class Weather(DataSource):
 
 	def getKeyValue(self):
 		random.seed(time.time())
-		if self.options["RandomCities"]:
+		if self.options["Randomize"]:
 			city=self.getRandomWorldCity()
 		else:
 			city=random.choice(self.options["Cities"])
