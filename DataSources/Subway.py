@@ -17,7 +17,7 @@ class Subway(DataSource):
 		self.renderers=["Subway"]
 
 	def getColorForRoute(self,route):
-		routes = csv.DictReader(open(self.datafolder+"stops.txt"))
+		routes = csv.DictReader(open(self.datafolder+"routes.txt"))
 		for route in routes:
 			if route["route_id"]==route:
 				return self.getRGBFromHex(route["color_route"])
