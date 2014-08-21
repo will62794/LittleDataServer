@@ -47,6 +47,11 @@ class SerialDraw():
 		time.sleep(.005)
 		self.serPorts[self.barNum].write(cmd)
 
+	def drawTriangle(self,x1,y1,x2,y2,x3,y3,color):
+		cmd="rect %s %s %s %s %s %s %s %s %s %s %s %s\n" % (str(x1),str(y1),str(x2),str(y2),str(x3),str(y3),color[0],color[1],color[2],color[0],color[1],color[2])
+		time.sleep(.005)
+		self.serPorts[self.barNum].write(cmd)
+
 	def drawRectangle(self,x,y,w,h,color):
 		cmd="rect %s %s %s %s %s %s %s \n" % (str(x),str(y),int(w),str(h),color[0],color[1],color[2])
 		time.sleep(.005)
