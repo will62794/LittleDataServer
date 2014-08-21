@@ -16,13 +16,13 @@ class Subway(DataSource):
 		self.icon="http://ihspawprint.com/wp-content/uploads/2014/03/mta_nyc_logo_svg1.png"
 		self.renderers=["Subway"]
 
-	def getColorForRoute(self,route):
+	def getColorForRoute(self,r):
 		routes = csv.DictReader(open(self.datafolder+"routes.txt"))
 		for route in routes:
-			if route["route_id"]==route:
-				return self.getRGBFromHex(route["color_route"])
+			if route["route_id"]==r:
+				return self.getRGBFromHex(route["route_color"])
 
-	def getRGBFromHex(self,hexstringstring):
+	def getRGBFromHex(self,hexstring):
 		rgbstr=hexstring
 		return list(tuple(ord(c) for c in rgbstr.decode('hex')))
 
@@ -96,7 +96,12 @@ class Subway(DataSource):
 				return t
 
 	def TimeUntilNextTrain(self):
-		secs=int(self.convertClockToSeconds(self.getNextTrainTime())-self.convertClockToSeconds(self.getLocalTime()))
+		localtime=self.convertClockToSeconds(self.getLocalTime())
+		nextraintime=self.convertClockToSeconds(self.getNextTrainTime())
+		secs=nextraintime-localtime
+		print nextraintime
+		print localtime
+		return secs
 		return str(datetime.timedelta(seconds=secs))
 
 

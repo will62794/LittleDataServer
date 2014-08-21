@@ -25,11 +25,11 @@ class DataUpdater(threading.Thread):
 		while True:
 			#print abs(time.time()-self.lastChange)
 			if abs(time.time()-self.lastChange)>self.waittime:
+				print "UPDATE"
 				keyValuePair=self.current_datasource.getKeyValue()
+				print keyValuePair
 				self.current_renderer.draw(keyValuePair)
 				print self.current_datasource.title
-				print keyValuePair
-				print "UPDATE"
 				self.lastChange=time.time()
 
 			time.sleep(2.0)
