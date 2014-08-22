@@ -17,7 +17,7 @@ class Colors(DataSource):
 		self.defaultMax=100
 		self.renderers=["Colors"]
 
-	def getKeyValue():
+	def getKeyValue(self):
 		return ["",""]
 
 
