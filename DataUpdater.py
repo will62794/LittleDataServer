@@ -31,6 +31,7 @@ class DataUpdater(threading.Thread):
 				print self.current_renderer.colorscale
 				self.current_renderer.setBrightness()
 				self.current_renderer.draw(keyValuePair)
+				self.current_renderer.setBrightness()
 				print self.current_datasource.title
 				self.lastChange=time.time()
 
