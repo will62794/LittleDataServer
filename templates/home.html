@@ -110,7 +110,7 @@
 				<h2 class="rendererTitle">Options	<img width=40px src="http://www.altavian.com/Assets/Images/icon-settings.png"></h2>
 				<br>
 
-				<form method=post action="/updateDataSource">
+				<form method=post action="/updateDataSource" style="float:left;">
 
 					{%for option in current_datasource.options.keys()%}
 
@@ -135,8 +135,8 @@
 					<h4>{{option}}</h4>
 					
 					<select name="{{option}}">
-					  <option {%if current_datasource.options[option]==True%}selected{%endif%}>On</option>
-					  <option {%if current_datasource.options[option]==False%}selected{%endif%}>Off</option>
+						<option {%if current_datasource.options[option]==True%}selected{%endif%}>On</option>
+						<option {%if current_datasource.options[option]==False%}selected{%endif%}>Off</option>
 					</select>
 
 
@@ -150,29 +150,29 @@
 					{%endif%}
 					{%endfor%}
 
-	<input style="width:210px;height:40px;" type=submit value="Set" class="btn">
+					<input style="width:210px;height:40px;" type=submit value="Set" class="btn">
 				</form>
 
-								<form method=post action="/updateColorOptions">
+				<form method=post action="/updateColorOptions" style="float:left;padding-left:60px;">
 
 
 					{%for option in current_renderer.coloroptions.keys()%}
 
-						<h4>{{option}}</h4>
-						<span>Red:</span> <input min="0" max="255" step="1" style="width:140px;" class="redSlider" type="range" name="{{option}}" value="{{current_renderer.coloroptions[option][0]}}"/> <span>{{current_renderer.coloroptions[option][0]}}</span>
-						<br>
-						Green: <input  min="0" max="255" step="1" style="width:140px;" class="greenSlider" type="range" name="{{option}}" value="{{current_renderer.coloroptions[option][1]}}"/> <span>{{current_renderer.coloroptions[option][1]}}</span>
-						<br>
-						Blue: <input  min="0" max="255" step="1" style="width:140px;" class="blueSlider" type="range" name="{{option}}" value="{{current_renderer.coloroptions[option][2]}}"/> <span>{{current_renderer.coloroptions[option][2]}}</span>
-<br><br>
-						<div class="colorPatch" style="width:170px;height:25px;background-color:rgb({{current_renderer.coloroptions[option][0]}},{{current_renderer.coloroptions[option][1]}},{{current_renderer.coloroptions[option][2]}});border-radius:4px;box-shadow:1px 1px 3px gray;margin-top:3px;"></div>
-						<br><br>
+					<h4>{{option}}</h4>
+					<span>Red:</span> <input min="0" max="255" step="1" style="width:140px;" class="redSlider" type="range" name="{{option}}" value="{{current_renderer.coloroptions[option][0]}}"/> <span>{{current_renderer.coloroptions[option][0]}}</span>
+					<br>
+					Green: <input  min="0" max="255" step="1" style="width:140px;" class="greenSlider" type="range" name="{{option}}" value="{{current_renderer.coloroptions[option][1]}}"/> <span>{{current_renderer.coloroptions[option][1]}}</span>
+					<br>
+					Blue: <input  min="0" max="255" step="1" style="width:140px;" class="blueSlider" type="range" name="{{option}}" value="{{current_renderer.coloroptions[option][2]}}"/> <span>{{current_renderer.coloroptions[option][2]}}</span>
+					<br><br>
+					<div class="colorPatch" style="width:170px;height:25px;background-color:rgb({{current_renderer.coloroptions[option][0]}},{{current_renderer.coloroptions[option][1]}},{{current_renderer.coloroptions[option][2]}});border-radius:4px;box-shadow:1px 1px 3px gray;margin-top:3px;"></div>
+					<br><br>
 
 					{%endfor%}
 
 
 					
-						<input style="width:210px;height:40px;" type=submit value="Set Colors" class="btn">
+					<input style="width:210px;height:40px;" type=submit value="Set Colors" class="btn">
 
 				</form>
 

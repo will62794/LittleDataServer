@@ -1,6 +1,6 @@
 import threading
-from DataSources import Weather,Asana,Subway
-from Renderers import MagnitudeColorBarRenderer,SubwayRenderer,ColorBarRenderer
+from DataSources import Weather,Asana,Subway,Colors
+from Renderers import MagnitudeColorBarRenderer,SubwayRenderer,ColorBarRenderer,ColorsRenderer
 import time
 
 
@@ -8,11 +8,11 @@ class DataUpdater(threading.Thread):
 	def __init__(self):
 		threading.Thread.__init__(self)
 		self.datasources={"Weather":Weather.Weather(),"Asana":Asana.AsanaAPI()}
-		self.datasources={"Weather":Weather.Weather(),"Asana":Asana.AsanaAPI(),"Subway":Subway.Subway()}
+		self.datasources={"Weather":Weather.Weather(),"Asana":Asana.AsanaAPI(),"Subway":Subway.Subway(),"Colors":Colors.Colors()}
 
 		self.current_datasource=self.datasources.values()[0]
 
-		self.renderers={"MagnitudeColorBar":MagnitudeColorBarRenderer.MagnitudeColorBarRenderer(),"ColorBar":ColorBarRenderer.ColorBarRenderer(),"Subway":SubwayRenderer.SubwayRenderer()}
+		self.renderers={"MagnitudeColorBar":MagnitudeColorBarRenderer.MagnitudeColorBarRenderer(),"ColorBar":ColorBarRenderer.ColorBarRenderer(),"Subway":SubwayRenderer.SubwayRenderer(),"Colors":ColorsRenderer.ColorsRenderer()}
 		self.current_renderer=self.renderers[self.current_datasource.renderers[0]]
 
 		self.lastChange=time.time()
