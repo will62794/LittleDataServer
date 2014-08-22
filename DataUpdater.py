@@ -13,7 +13,7 @@ class DataUpdater(threading.Thread):
 		self.current_datasource=self.datasources.values()[0]
 
 		self.renderers={"MagnitudeColorBar":MagnitudeColorBarRenderer.MagnitudeColorBarRenderer(),"ColorBar":ColorBarRenderer.ColorBarRenderer(),"Subway":SubwayRenderer.SubwayRenderer()}
-		self.current_renderer=self.renderers.values()[0]
+		self.current_renderer=self.renderers[self.current_datasource.renderers[0]]
 
 		self.lastChange=time.time()
 		self.waittime=12
