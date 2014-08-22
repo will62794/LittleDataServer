@@ -119,7 +119,7 @@ class Subway(DataSource):
 		#return ["Q",100,[255,255,0]]
 		route=self.options["Route"]
 		t=int(time.time()/60)%10
-		return [route,10-t,self.getColorForRoute(route)]
+		return [route,10-t,self.getColorForRoute(route[0])]
 		#return [route,self.TimeUntilNextTrain(),self.getColorForRoute(route)]
 
 	def getDayCode(self):
