@@ -65,7 +65,7 @@ class SerialDraw():
 
 	def drawGradientRectangle(self,x,y,w,h,color1,color2):
 		cmd="gradrect %s %s %s %s %s %s %s %s %s %s\n" % (str(x),str(y),int(w),str(h),color1[0],color1[1],color1[2],color2[0],color2[1],color2[2])
-		time.sleep(.005)
+		time.sleep(.010)
 		self.serPorts[self.barNum].write(cmd)
 
 	def drawChar(self,x,y,color,font,letter):

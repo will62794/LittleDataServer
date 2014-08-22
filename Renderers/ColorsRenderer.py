@@ -17,13 +17,16 @@ class ColorsRenderer(Renderer):
 		self.drawer.barNum=0
 		self.drawer.clearDrawBuffer()
 		self.drawer.drawGradientRectangle(0,0,16,64,self.coloroptions["Bar1_ColorA"],self.coloroptions["Bar1_ColorB"])
+		self.drawer.bufferswap("false")
+
 		self.drawer.barNum=1
 		self.drawer.clearDrawBuffer()
 		self.drawer.drawGradientRectangle(0,0,16,64,self.coloroptions["Bar2_ColorA"],self.coloroptions["Bar2_ColorB"])
+		self.drawer.bufferswap("false")
+
 		self.drawer.barNum=2
 		self.drawer.clearDrawBuffer()
 		self.drawer.drawGradientRectangle(0,0,16,64,self.coloroptions["Bar3_ColorA"],self.coloroptions["Bar3_ColorB"])
-
 		self.drawer.bufferswap("false")
 
 
