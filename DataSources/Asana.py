@@ -38,7 +38,7 @@ class AsanaAPI(object):
         self.options={"Randomize":True,"Projects":[],"Task_Threshold":0}
         self.title="Asana"
         self.icon="http://panterasup.com/images/promos/AsanaPressKit/asana-mark256.png"
-        self.renderers=["MagnitudeColorBar"]
+        self.renderers=["ColorBar"]
         random.seed(time.time())
 
 
