@@ -24,11 +24,11 @@ class SubwayRenderer(Renderer):
 		
 		self.drawer.barNum=0
 		self.drawer.clearDrawBuffer()
-		self.drawer.drawCircle(7,54,7,[255,255,0])
+		self.drawer.drawCircle(7,56,7,[255,255,0])
 		self.drawer.drawRectangle(0,0,16,10,[200,200,200])
 		self.drawer.drawTriangle(0,10,8,15,16,10,[200,200,200])
 
-		self.drawer.drawChar(5,54,[0,0,0],"6x10","Q")
+		self.drawer.drawChar(5,53,[0,0,0],"6x10","Q")
 		self.drawer.bufferswap("false")
 		#self.drawer.clearDrawBuffer()
 		#self.drawer.drawBarWithValue(colorForValue,str(percentage))
