@@ -19,7 +19,7 @@ class ColorBarRenderer(Renderer):
 		self.drawer.barNum=random.choice(range(0,3))
 		self.drawer.clearDrawBuffer()
 		self.drawer.drawRectangle(0,0,16,64,[0,152,175])
-		self.drawCenteredValue(str(value)[:2],50,[0,0,0],"8x13")
+		self.drawer.drawCenteredValue(str(value)[:2],50,[0,0,0],"8x13")
 		self.drawer.drawVerticalString(2,key.strip().upper()[:6],[0,0,0],"6x10")
 		self.drawer.transition("slide")
 
