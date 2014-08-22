@@ -35,7 +35,7 @@ class Weather(DataSource):
 		return self.getDataFromUrl(url)[0]["city"]
 
 	def chooseCity(self):
-		random.seed(time.time())
+		random.seed(int(time.time()))
 		return random.choice(self.options["Locations"])
 
 	def getTemperature(self,city):
@@ -54,6 +54,8 @@ class Weather(DataSource):
 			random.seed(time.time())
 			if self.options["Randomize"]:
 				city=self.getRandomWorldCity()
+				#Randomly selected whether you show a ranodm city or one from list
+				random.choice([city,random.choice(self.options["Locations"])])
 			else:
 				city=random.choice(self.options["Locations"])
 			temp=self.getTemperature(city)

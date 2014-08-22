@@ -24,8 +24,8 @@ class ColorBarRenderer(Renderer):
 			textcolor=[random.randint(50,100),random.randint(200,250),random.randint(200,250)]
 			backgroundcolor=[random.randint(200,250),random.randint(50,100),random.randint(50,100)]
 		else:
-			textcolor=self.options["TextColor"]
-			backgroundColor=self.options["BackgroundColor"]
+			textcolor=self.coloroptions["TextColor"]
+			backgroundColor=self.coloroptions["BackgroundColor"]
 
 		self.drawer.drawRectangle(0,0,16,64,backgroundcolor)
 
