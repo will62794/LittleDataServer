@@ -9,22 +9,31 @@ class Weather(DataSource):
 	def __init__(self):
 		super(Weather, self).__init__()
 		#Set one default key
-		self.options={"Cities":["New York","Los Angeles"],"Randomize":False}
+		self.options={"Locations":["New York","Los Angeles","19075","10001"],"Randomize":False}
 		self.title="Weather"
 		self.icon="https://cdn3.iconfinder.com/data/icons/weather-and-forecast/51/Weather_icons_grey-03-512.png"
 		self.renderers=["MagnitudeColorBar"]
 
 	def CityWeatherData(self,city):
-		url="http://api.openweathermap.org/data/2.5/weather?q="+city
+		#if zipcode
+		cityString=city
+		if len(city)==5 and city.isdigit():
+			cityString=self.getCityForZipCode(city)
+		url="http://api.openweathermap.org/data/2.5/weather?q="+cityString
 		return self.getDataFromUrl(url)
 	
+	def getCityForZipCode(self,zipcode):
+		url="http://ziptasticapi.com/"+zipcode
+		return self.getDataFromUrl(url)["city"]
+
+
 	def getRandomWorldCity(self):
 		url="http://filltext.com/?rows=1&city={city}"
 		return self.getDataFromUrl(url)[0]["city"]
 
 	def chooseCity(self):
 		random.seed(time.time())
-		return random.choice(self.options["Cities"])
+		return random.choice(self.options["Locations"])
 
 	def getTemperature(self,city):
 		return str(self.kelvinToFahrenheit(float(self.CityWeatherData(city)["main"]["temp"])))
@@ -42,7 +51,7 @@ class Weather(DataSource):
 		if self.options["Randomize"]:
 			city=self.getRandomWorldCity()
 		else:
-			city=random.choice(self.options["Cities"])
+			city=random.choice(self.options["Locations"])
 		temp=self.getTemperature(city)
 		return [city,str(int(float(temp)))]
 
