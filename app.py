@@ -88,6 +88,7 @@ def setBrightness():
 	b=optionsDict["brightnessValue"]
 	app.dataUpdater.current_renderer.brightness=b[0]
 	app.dataUpdater.current_renderer.setBrightness()
+	return redirect("/")
 
 @app.route('/updateColorOptions',methods=['GET', 'POST'])
 def updateColorOptions():

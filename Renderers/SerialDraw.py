@@ -26,7 +26,12 @@ class SerialDraw():
 	def setBrightness(self,level):
 		cmd="mode brightness "+level+"\n"
 		time.sleep(.005)
-		self.serPorts[self.barNum].write(cmd)
+		self.serPorts[0].write(cmd)
+		time.sleep(.005)
+		self.serPorts[1].write(cmd)
+		time.sleep(.005)
+		self.serPorts[2].write(cmd)
+
 			
 	def glowMode(self,onoff):
 		cmd="mode glow "+onoff+"\n"
