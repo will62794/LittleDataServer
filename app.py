@@ -62,13 +62,14 @@ def test():
 @app.route('/updateDataSource',methods=['GET', 'POST'])
 def updateDataSource():
 	optionsDict=dict(request.form)
-	print request.stream
 	print optionsDict
 	for option in optionsDict.keys():
-		if optionsDict[option][0]=="on":
+		print optionsDict[option][0]
+		if optionsDict[option][0].lower().strip()=="on":
 			app.dataUpdater.current_datasource.options[option]=True
-		elif optionsDict[option][0]=="off":
+		elif optionsDict[option][0].lower().strip()=="off":
 			app.dataUpdater.current_datasource.options[option]=False
+			print app.dataUpdater.current_datasource.options
 		elif isinstance(optionsDict[option],list):
 			optionsDict[option]=[el for el in optionsDict[option] if el]
 			app.dataUpdater.current_datasource.options[option]=optionsDict[option]

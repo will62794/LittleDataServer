@@ -9,6 +9,7 @@ class Renderer(object):
 		self.scaleMax=100
 		self.drawer=SerialDraw()
 		self.drawer.WakeUpTeensy()
+		self.coloroptions={}
 
 	
 	def getScalePercentageForValue(self,value):

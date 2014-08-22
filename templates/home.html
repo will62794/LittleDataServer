@@ -133,13 +133,20 @@
 
 					{% if convert_option(current_datasource.options[option])=="bool" %}
 					<h4>{{option}}</h4>
-					<div class="onoffswitch">
+					
+					<select name="{{option}}">
+					  <option {%if current_datasource.options[option]==True%}selected{%endif%}>On</option>
+					  <option {%if current_datasource.options[option]==False%}selected{%endif%}>Off</option>
+					</select>
+
+
+					<!--div class="onoffswitch">
 						<input type="checkbox" name="{{option}}" class="onoffswitch-checkbox" id="myonoffswitch" {%if current_datasource.options[option]%}checked{%endif%}>
 						<label class="onoffswitch-label" for="myonoffswitch">
 							<span class="onoffswitch-inner"></span>
 							<span class="onoffswitch-switch"></span>
 						</label>
-					</div>
+					</div-->
 					{%endif%}
 					{%endfor%}
 

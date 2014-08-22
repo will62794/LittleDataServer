@@ -23,7 +23,7 @@ class SerialDraw():
 		except:
 			return False
 
-	def glowMode(onoff):
+	def glowMode(self,onoff):
 		cmd="mode glow "+onoff+"\n"
 		time.sleep(.005)
 		self.serPorts[self.barNum].write(cmd)		
