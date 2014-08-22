@@ -9,7 +9,7 @@ class MagnitudeColorBarRenderer(Renderer):
 		self.description="The MagnitudeColorBar Renderer renderer takes a key and a value, a Colorscale, and a max and min value for the data values and draws a bar of a certain color and height."
 		self.colorscale=[[139,68,254],[255,10,50],[155,20,50]]
 		self.options={}
-		self.coloroptions={"TextColor":[10,10,10]}
+		self.coloroptions={"TextColor":[35,35,35],"ValueColor":[0,0,0]}
 
 	def draw(self,keyValuePair):
 		key=keyValuePair[0]

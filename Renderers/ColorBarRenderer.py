@@ -20,12 +20,12 @@ class ColorBarRenderer(Renderer):
 		self.drawer.barNum=random.choice(range(0,3))
 		self.drawer.clearDrawBuffer()
 		
-		if self.options["RandomizeColors"]:
-			textcolor=[random.randint(50,100),random.randint(200,250),random.randint(200,250)]
-			backgroundcolor=[random.randint(200,250),random.randint(50,100),random.randint(50,100)]
-		else:
-			textcolor=self.coloroptions["TextColor"]
-			backgroundColor=self.coloroptions["BackgroundColor"]
+		#if self.options["RandomizeColors"]:
+		#	textcolor=[random.randint(50,100),random.randint(200,250),random.randint(200,250)]
+		#	backgroundcolor=[random.randint(200,250),random.randint(50,100),random.randint(50,100)]
+		#else:
+		textcolor=self.coloroptions["TextColor"]
+		backgroundColor=self.coloroptions["BackgroundColor"]
 
 		self.drawer.drawRectangle(0,0,16,64,backgroundcolor)
 
