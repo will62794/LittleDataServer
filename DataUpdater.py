@@ -1,6 +1,6 @@
 import threading
 from DataSources import Weather,Asana,Subway
-from Renderers import MagnitudeColorBarRenderer,SubwayRenderer
+from Renderers import MagnitudeColorBarRenderer,SubwayRenderer,ColorBarRenderer
 import time
 
 
@@ -12,7 +12,7 @@ class DataUpdater(threading.Thread):
 
 		self.current_datasource=self.datasources.values()[0]
 
-		self.renderers={"MagnitudeColorBar":MagnitudeColorBarRenderer.MagnitudeColorBarRenderer(),"ColorBar":SubwayRenderer.SubwayRenderer(),"Subway":SubwayRenderer.SubwayRenderer()}
+		self.renderers={"MagnitudeColorBar":MagnitudeColorBarRenderer.MagnitudeColorBarRenderer(),"ColorBar":ColorBarRenderer.ColorBarRenderer(),"Subway":SubwayRenderer.SubwayRenderer()}
 		self.current_renderer=self.renderers.values()[0]
 
 		self.lastChange=time.time()

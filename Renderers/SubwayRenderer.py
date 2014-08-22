@@ -16,7 +16,10 @@ class SubwayRenderer(Renderer):
 
 		key=keyValuePair[0]
 		value=keyValuePair[1]
-		color=keyValuePair[2]
+		try:
+			color=keyValuePair[2]
+		except:
+			color=[200,200,200]
 
 		#percentage=self.getScalePercentageForValue(value)
 		#colorForValue=self.getColorForValue(value)
