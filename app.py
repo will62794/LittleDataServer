@@ -124,6 +124,8 @@ def utility_processor():
 			return "list"
 		if isinstance(value, bool):
 			return "bool"
+		if isinstance(value, str):
+			return "str"
 	return dict(convert_option=convert_option)
 
 app.dataUpdater=DataUpdater()

@@ -6,7 +6,7 @@ import time
 class Subway(DataSource):
 	def __init__(self):
 		super(Subway, self).__init__()
-		self.options={"Route":"Q","Direction":"Northbound","Stop":"D40","Station":""}
+		self.options={"Route":["Q"],"Direction":["Northbound"],"Stop":["D40"],"Station":[""]}
 		self.title="Subway"
 		self.datafolder="DataSources/mtadata/"
 		self.directionCode={"Northbound":"0","Southbound":"1"}
@@ -118,7 +118,9 @@ class Subway(DataSource):
 	def getKeyValue(self):
 		#return ["Q",100,[255,255,0]]
 		route=self.options["Route"]
-		return [route,self.TimeUntilNextTrain(),self.getColorForRoute(route)]
+		t=int(time.time()/60)%10
+		return [route,10-t,self.getColorForRoute(route)]
+		#return [route,self.TimeUntilNextTrain(),self.getColorForRoute(route)]
 
 	def getDayCode(self):
 		datetime.datetime.today()

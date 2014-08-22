@@ -148,6 +148,22 @@
 						</label>
 					</div-->
 					{%endif%}
+
+					{% if convert_option(current_datasource.options[option])=="str" %}
+					<h4>{{option}}</h4>
+					
+					<input type="text" name={{option}} value="{{current_datasource.options[option]}}">
+					<br>
+
+
+					<!--div class="onoffswitch">
+						<input type="checkbox" name="{{option}}" class="onoffswitch-checkbox" id="myonoffswitch" {%if current_datasource.options[option]%}checked{%endif%}>
+						<label class="onoffswitch-label" for="myonoffswitch">
+							<span class="onoffswitch-inner"></span>
+							<span class="onoffswitch-switch"></span>
+						</label>
+					</div-->
+					{%endif%}
 					{%endfor%}
 
 					<input style="width:210px;height:40px;" type=submit value="Set" class="btn">
