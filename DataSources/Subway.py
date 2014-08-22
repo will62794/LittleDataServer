@@ -6,7 +6,7 @@ import time
 class Subway(DataSource):
 	def __init__(self):
 		super(Subway, self).__init__()
-		self.options={"Route":"Q","Direction":"Northbound","Stop":"","Station":""}
+		self.options={"Route":"Q","Direction":"Northbound","Stop":"D40","Station":""}
 		self.title="Subway"
 		self.datafolder="DataSources/mtadata/"
 		self.directionCode={"Northbound":"0","Southbound":"1"}
@@ -29,6 +29,7 @@ class Subway(DataSource):
 	def getAllStations(self):
 		stations = csv.DictReader(open(self.datafolder+"stops.txt"))
 		return stations
+
 	def getAllTimes(self):
 		stop_times= csv.DictReader(open(self.datafolder+"stop_times.txt"))
 		return stop_times
@@ -97,12 +98,13 @@ class Subway(DataSource):
 
 	def TimeUntilNextTrain(self):
 		localtime=self.convertClockToSeconds(self.getLocalTime())
+		print self.getNextTrainTime()
 		nextraintime=self.convertClockToSeconds(self.getNextTrainTime())
 		secs=nextraintime-localtime
 		print nextraintime
 		print localtime
-		return secs
-		return str(datetime.timedelta(seconds=secs))
+		return float(secs)/60
+		return str(float(datetime.timedelta(seconds=secs))/60)
 
 
 	def convertClockToSeconds(self,clockstring):
@@ -127,18 +129,7 @@ class Subway(DataSource):
 			return "SAT"
 		if day==self.sunday:
 			return "SUN"
-"""
-g=Subway()
-g.options["Station"]="D40"
-print g.TimeUntilNextTrain()
-#print "Next "+g.options["Route"]+" Train: "+g.getNextTrainTime()
-for stop in g.getStopsForTrip():
-	print g.getStationById(stop)["stop_name"]
 
-#for t in g.getTimesForStop():
-	#print t["departure_time"]+" " +str(g.getStationById(t["stop_id"])["stop_name"])
-	#print ""
-	#pass
-	#print t["stop_id"]
-"""
+
+
 
