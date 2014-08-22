@@ -31,6 +31,10 @@ def set_data_source(datasource):
 	app.dataUpdater.current_datasource=app.dataUpdater.datasources[datasource]
 	renderer=app.dataUpdater.current_datasource.renderers[0]
 	app.dataUpdater.current_renderer=app.dataUpdater.renderers[renderer]
+	#Use default data source color scale if there is one
+	if app.dataUpdater.current_datasource.defaultColorscale:
+		app.dataUpdater.current_renderer.colorscale=app.dataUpdater.current_datasource.defaultColorscale
+		
 	print "DataSource: "+app.dataUpdater.current_datasource.title
 	print "Renderer: "+app.dataUpdater.current_renderer.title
 
