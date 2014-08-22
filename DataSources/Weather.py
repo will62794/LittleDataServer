@@ -14,6 +14,9 @@ class Weather(DataSource):
 		self.icon="https://cdn3.iconfinder.com/data/icons/weather-and-forecast/51/Weather_icons_grey-03-512.png"
 		self.renderers=["MagnitudeColorBar"]
 		self.defaultColorscale=[[255,255,255],[174,196,221],[168,207,56],[168,34,34]]
+		self.defaultMin=0
+		self.defaultMax=100
+
 
 	def CityWeatherData(self,city):
 		#if zipcode

@@ -16,7 +16,7 @@ class DataUpdater(threading.Thread):
 		self.current_renderer=self.renderers[self.current_datasource.renderers[0]]
 
 		self.lastChange=time.time()
-		self.waittime=12
+		self.waittime=9
 
 		print "CREATED"
 
@@ -28,6 +28,7 @@ class DataUpdater(threading.Thread):
 				print "UPDATE"
 				keyValuePair=self.current_datasource.getKeyValue()
 				print keyValuePair
+				print self.current_renderer.colorscale
 				self.current_renderer.draw(keyValuePair)
 				print self.current_datasource.title
 				self.lastChange=time.time()
