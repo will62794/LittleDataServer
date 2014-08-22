@@ -23,6 +23,11 @@ class SerialDraw():
 		except:
 			return False
 
+	def glowMode(onoff):
+		cmd="mode glow "+onoff+"\n"
+		time.sleep(.005)
+		self.serPorts[self.barNum].write(cmd)		
+
 	def bufferswap(self,copy):
 		cmd="bufferswap "+copy+"\n"
 		time.sleep(.005)
@@ -33,6 +38,7 @@ class SerialDraw():
 			cmd="transition fade "+str(fadetime)+"\n"
 		else:
 			cmd="transition "+transition+"\n"
+		self.glowMode("off")
 		time.sleep(.005)
 		self.serPorts[self.barNum].write(cmd)
 
