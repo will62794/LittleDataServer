@@ -66,6 +66,7 @@ def test():
 
 @app.route('/updateDataSource',methods=['GET', 'POST'])
 def updateDataSource():
+	app.current_renderer.drawer.glowMode("off")
 	optionsDict=dict(request.form)
 	print optionsDict
 	for option in optionsDict.keys():
@@ -81,6 +82,12 @@ def updateDataSource():
 
 	return redirect("/")
 
+@app.route('/brightness',methods=['GET', 'POST'])
+def setBrightness():
+	optionsDict=dict(request.form)
+	b=optionsDict["brightnessValue"]
+	app.dataUpdater.current_renderer.brightness=b[0]
+	app.dataUpdater.current_renderer.setBrightness()
 
 @app.route('/updateColorOptions',methods=['GET', 'POST'])
 def updateColorOptions():

@@ -37,16 +37,17 @@ class SubwayRenderer(Renderer):
 		self.drawer.drawCircle(7,55,7,routecolor)
 		self.drawer.drawRectangle(0,0,16,pixelheight,c)
 		self.drawer.drawTriangle(0,pixelheight,8,pixelheight+5,16,pixelheight,c)
-
 		self.drawer.drawChar(5,51,[0,0,0],"6x10",routename)
 		self.drawer.bufferswap("false")
-		#self.drawer.clearDrawBuffer()
-		#self.drawer.drawBarWithValue(colorForValue,str(percentage))
-		#self.drawer.drawVerticalString(2,value,[0,0,0],"6x10")
-		#self.drawer.transition("slide")
-		#self.drawer.bufferswap("false")
-		#except:
-		#	pass
+
+
+		self.drawer.barNum=1
+		self.drawer.clearDrawBuffer()
+		self.drawer.bufferswap("false")
+		self.drawer.barNum=2
+		self.drawer.clearDrawBuffer()
+		self.drawer.bufferswap("false")
+
 
 
 

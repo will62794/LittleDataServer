@@ -23,8 +23,11 @@
 		<div class="span7">
 			<h3 style="font-family: 'Electrolize', sans-serif;padding-left:20px;font-size:53px;margin-left:20px;color:black;">little<span style="color:black;">Data</span>
 			</h3>
+
+
 		</div>
 	</div>
+
 
 
 
@@ -42,7 +45,11 @@
 			</p>
 
 
+
+
 			<ul class="modeList">
+				
+
 				{%for dataSource in dataSources.values()%}
 				<a href="/datasource/{{dataSource.title}}"><li  class={%if dataSource.title==current_datasource.title%}'active'{%endif%}>{{dataSource.title}}
 					<img src="{{dataSource.icon}}">
@@ -52,15 +59,35 @@
 				{%endfor%}
 
 			</ul>
-			<!--h4>Options</h4>
 
-			<form method=post action="/updateDataSource">
+			<form method=post action="/brightness">
+				Brightness <br>	<br>
+					<input style="float:right;" min="0" max="100" step="1" style="width:140px;" type="range" name="brightnessValue" value="{{current_renderer.brightness}}"/>
 
+				<input style="width:210px;height:40px;" type=submit value="Set Brightness" class="btn">
+
+
+			</form>
+
+
+
+		</div>
+
+
+
+		<!-- RENDERER CONFIG PANE -->
+
+		<div class="span6 optionsPane">
+
+			<h2 class="rendererTitle">Options	<img width=40px src="http://www.altavian.com/Assets/Images/icon-settings.png"></h2>
+			<br>
+
+			<form method=post action="/updateDataSource" style="float:left;">
 
 				{%for option in current_datasource.options.keys()%}
 
 				{% if convert_option(current_datasource.options[option])=="list" %}
-				<h5>{{option}}</h5>
+				<h4>{{option}}</h4>
 				{%for val in current_datasource.options[option]%}
 
 				<input type="text" name={{option}} value='{{val}}'>
@@ -72,72 +99,17 @@
 				<br>
 				<input type="text" name={{option}} placeholder='Add New...'>
 				<br>
-				
+
 				{%endif%}
 
 
 				{% if convert_option(current_datasource.options[option])=="bool" %}
-				<h5>{{option}}</h5>
-				<div class="onoffswitch">
-					<input type="checkbox" name="{{option}}" class="onoffswitch-checkbox" id="myonoffswitch" {%if current_datasource.options[option]%}checked{%endif%}>
-					<label class="onoffswitch-label" for="myonoffswitch">
-						<span class="onoffswitch-inner"></span>
-						<span class="onoffswitch-switch"></span>
-					</label>
-				</div>
-				{%endif%}
-				{%endfor%}
-				<br><br>
+				<h4>{{option}}</h4>
 
-				<input style="width:250px;height:40px;" type=submit value="Update Data Source" class="btn">
-			</form>
-		</div>
-
-		<div class="span1">
-
-
-
-			<div class="arrow"></div-->
-
-			</div>
-
-
-
-			<!-- RENDERER CONFIG PANE -->
-
-			<div class="span6 optionsPane">
-
-				<h2 class="rendererTitle">Options	<img width=40px src="http://www.altavian.com/Assets/Images/icon-settings.png"></h2>
-				<br>
-
-				<form method=post action="/updateDataSource" style="float:left;">
-
-					{%for option in current_datasource.options.keys()%}
-
-					{% if convert_option(current_datasource.options[option])=="list" %}
-					<h4>{{option}}</h4>
-					{%for val in current_datasource.options[option]%}
-
-					<input type="text" name={{option}} value='{{val}}'>
-					<br>
-
-					{%endfor%}
-
-					<input type="text" name={{option}} placeholder='Add New...'>
-					<br>
-					<input type="text" name={{option}} placeholder='Add New...'>
-					<br>
-					
-					{%endif%}
-
-
-					{% if convert_option(current_datasource.options[option])=="bool" %}
-					<h4>{{option}}</h4>
-					
-					<select name="{{option}}">
-						<option {%if current_datasource.options[option]==True%}selected{%endif%}>On</option>
-						<option {%if current_datasource.options[option]==False%}selected{%endif%}>Off</option>
-					</select>
+				<select name="{{option}}">
+					<option {%if current_datasource.options[option]==True%}selected{%endif%}>On</option>
+					<option {%if current_datasource.options[option]==False%}selected{%endif%}>Off</option>
+				</select>
 
 
 					<!--div class="onoffswitch">

@@ -10,8 +10,12 @@ class Renderer(object):
 		self.drawer=SerialDraw()
 		self.drawer.WakeUpTeensy()
 		self.coloroptions={}
+		self.brightness="100"
 
-	
+	def setBrightness(self):
+		print self.brightness
+		self.drawer.setBrightness(str(self.brightness))
+
 	def getScalePercentageForValue(self,value):
 		offsetValue=abs(self.scaleMin-int(value))
 		scaleSize=abs(self.scaleMax-self.scaleMin)
