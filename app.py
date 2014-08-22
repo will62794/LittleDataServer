@@ -32,13 +32,18 @@ def set_data_source(datasource):
 	renderer=app.dataUpdater.current_datasource.renderers[0]
 	app.dataUpdater.current_renderer=app.dataUpdater.renderers[renderer]
 	#Use default data source color scale if there is one
-	if app.dataUpdater.current_datasource.defaultColorscale:
+	
+	try:
 		app.dataUpdater.current_renderer.colorscale=app.dataUpdater.current_datasource.defaultColorscale
-
-	if app.dataUpdater.current_datasource.defaultMin:
-		app.dataUpdater.current_renderer.scaleMin=app.dataUpdater.current_datasource.defaultMin
-	if app.dataUpdater.current_datasource.defaultMax:
-		app.dataUpdater.current_renderer.scaleMax=app.dataUpdater.current_datasource.defaultMax
+	except:
+		pass
+	try:
+		if app.dataUpdater.current_datasource.defaultMin:
+			app.dataUpdater.current_renderer.scaleMin=app.dataUpdater.current_datasource.defaultMin
+		if app.dataUpdater.current_datasource.defaultMax:
+			app.dataUpdater.current_renderer.scaleMax=app.dataUpdater.current_datasource.defaultMax
+	except:
+		pass
 
 
 	print "DataSource: "+app.dataUpdater.current_datasource.title
@@ -67,10 +72,21 @@ def updateDataSource():
 		elif isinstance(optionsDict[option],list):
 			optionsDict[option]=[el for el in optionsDict[option] if el]
 			app.dataUpdater.current_datasource.options[option]=optionsDict[option]
+
 	return redirect("/")
 
 
+@app.route('/updateColorOptions',methods=['GET', 'POST'])
+def updateColorOptions():
+	optionsDict=dict(request.form)
+	print optionsDict
+	for option in optionsDict.keys():
+		try:
+			app.dataUpdater.current_renderer.coloroptions[option]=optionsDict[option]
+		except:
+			pass
 
+	return redirect("/")
 
 
 @app.route('/addColorscalePoint')
@@ -107,7 +123,9 @@ def utility_processor():
 app.dataUpdater=DataUpdater()
 
 if __name__ == '__main__':
+	set_data_source("Weather")
 	app.run(host='0.0.0.0',debug=True)
+
 
 
 

@@ -30,7 +30,6 @@ class Weather(DataSource):
 		url="http://ziptasticapi.com/"+zipcode
 		return self.getDataFromUrl(url)["city"]
 
-
 	def getRandomWorldCity(self):
 		url="http://filltext.com/?rows=1&city={city}"
 		return self.getDataFromUrl(url)[0]["city"]
@@ -51,13 +50,16 @@ class Weather(DataSource):
 		return self.getDataFromUrl(url)[0]["code"]
 
 	def getKeyValue(self):
-		random.seed(time.time())
-		if self.options["Randomize"]:
-			city=self.getRandomWorldCity()
-		else:
-			city=random.choice(self.options["Locations"])
-		temp=self.getTemperature(city)
-		return [city,str(int(float(temp)))]
+		try:
+			random.seed(time.time())
+			if self.options["Randomize"]:
+				city=self.getRandomWorldCity()
+			else:
+				city=random.choice(self.options["Locations"])
+			temp=self.getTemperature(city)
+			return [city,str(int(float(temp)))]
+		except:
+			return ["New York",str(int(float(self.getTemperature("New York"))))]
 
 	def kelvinToCelsius(self,C):
 		return (C - 273.15)* 1.8000
