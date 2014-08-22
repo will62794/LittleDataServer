@@ -66,7 +66,7 @@ def test():
 
 @app.route('/updateDataSource',methods=['GET', 'POST'])
 def updateDataSource():
-	app.current_renderer.drawer.glowMode("off")
+	app.dataUpdater.current_renderer.drawer.glowMode("off")
 	optionsDict=dict(request.form)
 	print optionsDict
 	for option in optionsDict.keys():
